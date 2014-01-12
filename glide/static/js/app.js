@@ -1,0 +1,1 @@
+var mzk = angular.module('mzk',['ui.bootstrap'])

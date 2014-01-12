@@ -1,0 +1,49 @@
+User data :
+	-> Name
+	-> Email
+	-> Password
+user_cat
+	-> phone number
+	-> category
+order data :
+	-> Start Date
+	-> Duration
+	-> Course .
+	-> Address, Area
+	-> food type
+	-> kitchen
+
+kitchen:
+	-> name
+	-> location
+	-> Description
+	-> photo
+	-> foodlevel
+	-> foodtype
+	-> food course
+	-> profile
+
+order changes :
+	-> Order
+	-> Date --- Add Quantity, Donate, Cancel
+
+food course :
+	-> name
+
+food type: 
+	-> name
+
+calender:
+	-> date
+	-> month
+	-> year
+	-> day
+
+crumb_data: 
+	-> name
+
+crumbs:
+	-> order
+	-> crumb data
+	-> quantity
+	-> date

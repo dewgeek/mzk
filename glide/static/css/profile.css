@@ -1,0 +1,12 @@
+.navbar-brand{
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+.order-btn{
+	background-color: #1b5c27;
+	border-radius:5px;
+	border:1px;
+	color: #fff;
+	padding: 05px;
+	width:100%; 
+}

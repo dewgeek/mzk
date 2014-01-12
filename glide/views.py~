@@ -1,0 +1,5 @@
+from django.http import HttpResponse,Http404,HttpRequest
+from django.shortcuts import render_to_response,HttpResponseRedirect
+
+def home(request):
+	return render_to_response("index.html")
