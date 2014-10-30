@@ -3,3 +3,7 @@ venv
 *.html~
 *Procfile~
 staticfiles
+*.sqlite3
+*.db
+
+

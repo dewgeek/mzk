@@ -1,1 +1,1 @@
-web: gunicorn mzk.wsgi
+web: gunicorn jp.wsgi
