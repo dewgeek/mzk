@@ -1,0 +1,26 @@
+website: mzk.herokuapp.com
+
+This website is designed to list out kitches available in Jaipur according to locations and provide a portal to order food. 
+
+*website have Dummy data
+
+== Features ==
+
+1) Order food going from anu number of kitchens (they pile up in cart, as you keep on addind them)
+2) Separate delivery address option for all the meals of the day
+3) Dashboard to browse previous orders, change Information.
+4) Dashboard provides a big calender to Increase quantity, cancel order and changing delivery address for every meal. 
+
+
+== Technologies used ==
+
+1) Django on server side
+2) Bootstrap for Front End CSS work.
+3) and jQuery ofcourse , for all the DOM manipulations 
+
+
+== Copy rights ==
+
+The project was completed on Sept 2013. 
+No copyright Issues if you copy anypart of code.
+If you want to replicate entire site, please ping me.
