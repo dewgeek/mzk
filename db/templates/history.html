@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	{% load static %}
+	<table class="table table-responsive table-striped">
+	{% for order in orders %}
+		<thead>
+			<tr class="success">
+				<td><p>Kitchen</td></p>
+				<td><p>Course</td></p>
+
+				<td><p>start date</td></p>
+				<td><p>end date</td></p>
+				<td><p>Address</td></p>								
+			</tr>
+		</thead>		
+		<tbody>
+			{% for sample in order.orders %}
+			<tr>
+				<td><p>{{ order.kitchen }}</td></p>
+				<td><p>{{ sample.course }}</td></p>
+				<td><p>{{ sample.start_date }}</td></p>
+				<td><p>{{ sample.end_date }}</td></p>
+				<td><p>{{ sample.address }}</td></p>
+			</tr>
+			{% endfor %}
+		</tbody>
+		
+	{% endfor %}
+	</table>
+
+{% endblock %}
+
+

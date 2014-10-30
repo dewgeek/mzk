@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	{% load static %}
+  <title>Dashboard</title>
+  <div class="row">
+    <div class="col-md-4 ">
+      {% if user.is_authenticated %}
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="/dashboard/">Home</a></li>
+          <li ><a href="/user/">Profile</a></li>
+        </ul> 
+      {% endif %}
+    </div>
+    <div class="col-md-8">
+	<p>click on the particular date to cancel/modify order</p>
+    </div>
+  </div>
+  <div class="row">
+    <br/>
+  </div>
+  
+	<div id="calendar"></div>
+  
+  <div class="modal" id="myDayModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title">Orders</h4>
+          </div>
+	
+          <div class="modal-body">
+            <div id="calender_order"></div>
+          </div>
+          
+          <div class="modal-footer">
+            <a href="#" data-dismiss="modal" class="btn">Close</a>
+            
+          </div>
+
+        </div>
+      </div>
+    </div>  
+
+
+		<script type="text/javascript" src="{% static 'lib/jquery-ui.custom.min.js' %}"></script>			
+		<script type="text/javascript" src="{% static 'js/dashboard.js' %}"></script>			
+		<script type="text/javascript" src="{% static 'js/fullcalendar.min.js' %}"></script>			
+
+		<link href="/static/css/fullcalendar.css" rel="stylesheet" type="text/css">
+
+{% endblock %}
+
+

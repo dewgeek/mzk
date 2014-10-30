@@ -1,0 +1,70 @@
+
+$(document).ready(function(){
+	$("form").validate()
+	
+	var date = new Date();
+	var d = date.getDate();
+	var m = date.getMonth();
+	var y = date.getFullYear();
+	
+	var calendar = $('#calendar').fullCalendar({
+		header: {
+			left: 'prev,next today',
+			center: 'title',
+			right: 'month,agendaWeek,agendaDay'
+		},
+		selectable: true,
+		selectHelper: true,
+		select: function(start, end, allDay) {
+			$('#myModal').modal()
+
+			var title = prompt('Event Title:');
+			if (title) {
+				/*
+				calendar.fullCalendar('renderEvent',
+					{
+						title: title,
+						start: start,
+						end: end,
+						allDay: allDay
+					},
+					false // make the event "stick"
+				);
+				*/
+				console.log(title)
+			}
+			calendar.fullCalendar('unselect');
+		},
+		editable: true,
+		events: [
+/*				{
+				title: 'All Day Event',
+				start: new Date(y, m, 1)
+			},
+*/			]
+	});
+
+	
+})
+
+
+
+$("form input:checkbox").click(function(){
+	change_form($(this).prop("value"),$(this).prop("name").split("_")[0],$(this).prop("checked"))
+})
+
+function change_form(main_val,temp_val,status){
+	form_elems = ["name","landmark","mobile"]
+	for(i=0;i<form_elems.length;i++){
+		$("input[name="+"'"+temp_val+"_"+form_elems[i]+"']").prop("readonly",status)
+	}
+	$("textarea[name="+"'"+temp_val+"_address']").prop("readonly",status);
+
+	if(status){
+		for(i=0;i<form_elems.length;i++){
+			$("input[name="+"'"+temp_val+"_"+form_elems[i]+"']").val($("input[name="+"'"+main_val+"_"+form_elems[i]+"']").val())
+		}
+		$("textarea[name="+"'"+temp_val+"_address']").val($("textarea[name="+"'"+main_val+"_address']").val());
+	}
+}
+

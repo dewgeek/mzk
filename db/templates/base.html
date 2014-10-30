@@ -1,0 +1,132 @@
+
+<html>
+	{% load static %}
+	<head>
+		<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css">
+		<link href="/static/css/profile.css" rel="stylesheet" type="text/css">
+		<title>Mommyz kitchen</title>
+		<script type="text/javascript" src="{% static 'lib/jquery-1.10.2.min.js' %}"></script>		
+		<script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>		
+		<script type="text/javascript" src="{% static 'lib/jquery.cycle.lite.js' %}"></script>	
+		<script type="text/javascript" src="{% static 'js/base.js' %}"></script>	
+		<script type="text/javascript" src="{% static 'lib/jquery.validate.min.js' %}"></script>	
+		<script type="text/javascript" src="{% static 'js/custom_messages.js' %}"></script>	
+		
+		<style type="text/css">
+			body{
+				padding-top: 75px;
+			}
+
+			ul li{
+				padding-right: 10px;
+			}
+			
+			.main-content{
+				min-height: 100%;
+				padding-bottom: 40px;
+				
+			}
+			
+
+			.footer{
+				
+				
+				height:40px;
+				color: #ffd;
+				background-color: #444;
+			}
+			.wrapper{
+				height:100%;
+			}
+		</style>
+
+	</head>
+	<body>
+		<div class="wrapper">
+		<div class="container main-content">
+			<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a href="/"><img src="{% static 'images/mzk.png' %}" class = "navbar-brand img-responsive" ></a>
+				</div>
+				{% if not user.is_authenticated %}
+					<div class="collapse navbar-collapse bs-example-navbar-collapse-1">
+					    <ul class="nav navbar-nav navbar-right">
+					      
+						    
+					    	
+					    	<li><a href="/about/" class="navbar-link" >About</a> </li>
+					    	<li><a href="/contact/" class="navbar-link">Contact</a></li>
+					    	<li><a href="#" class="navbar-link" onClick="$call_cart()">Cart </a> </li>
+					    	<li><a href="/portal/" class="navbar-link">Login</a></li>
+					    </ul>
+					</div>      
+				{% else %}
+					<div class="collapse navbar-collapse bs-example-navbar-collapse-1">
+					    <ul class="nav navbar-nav navbar-right">
+					      
+						    <li><a href="/about/" class="navbar-link" >About</a> </li>
+					    	<li><a href="/dashboard/" class="navbar-link">Dashboard</a></li>
+					    	<li><a href="#" class="navbar-link" onClick="$call_cart()">Cart </a> </li>
+					    	<li><a href="/contact/" class="navbar-link">Contact</a></li>
+					    	<li><a href="/logout/" class="navbar-link">Logout</a></li>
+					    </ul>
+					</div>  
+
+
+				{% endif %}
+			</nav>	
+				
+			{% block content %}{% endblock %}	
+			
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			        <h4 class="modal-title" id="myModalLabel">Cart</h4>
+			      </div>
+			      <div class="modal-body">
+			      	<table class="table" id="cart">
+
+			      		<thead>
+			      			<tr>
+			      				<td><p><b>Kitchen</b></p></td>
+			      				<td><p><b>Course</b></p></td>
+			      				<td><p><b>Span</b></p></td>
+			      				<td><p><b>Cost</b></p></td>
+			      				<td><p><b></b></p></td>
+			      			</tr>
+			      		</thead>
+			      		<tbody>
+			      		
+			        	</tbody>
+			      	</table>
+			        
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        <a href="/cart/"><button type="button" class="btn btn-primary">Check out</button></a>
+			      </div>
+			    </div><!-- /.modal-content -->
+			  </div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+
+		</div>
+		<div class="footer">
+			<div class="container text-center">
+				
+						<p>All rights reserverd</p>
+				
+			</div>
+		</div>
+		
+	</div>		
+	</body>
+</html>

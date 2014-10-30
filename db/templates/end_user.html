@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+{% block content %}
+{% load db_extras %}
+{% load static %}
+	<title>Profile</title>
+	<div class="row">
+		<div class="col-md-4 ">
+			{% if user.is_authenticated %}
+				<ul class="nav nav-tabs">
+				  <li ><a href="/dashboard/">Home</a></li>
+				  <li class="active"><a href="/user/">Profile</a></li>
+				</ul>	
+			{% endif %}
+		</div>
+		<div class="col-md-8">
+		</div>
+	</div>
+	<div class="row">
+		<br/>
+	</div>
+	<div class="row">
+		<div class="col-md-4 ">
+			<h4>Personal Information</h4>
+			<table class="table table-condensed">
+				<tr><td><p>Username:</p></td><td><p>{{ user.username }}</p></td></tr>
+				<tr><td><p>Email:</p></td>
+					<td>
+						<p>{% if user.email %}{{ user.email }}{% else %}
+
+							Not Provided
+							<button class="btn btn-xs glyphicon glyphicon-pencil" data-toggle="modal" data-target="#addEmailModal"></button><br/>
+							{% endif %}&nbsp;&nbsp;
+
+							</p>
+					</td>
+				</tr>
+			</table>
+
+		</div>
+		<div class="col-md-8"></div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<button class="btn btn-sm" data-toggle="modal" data-target="#pswdChangeModal">Change Password</button><br/>
+			
+			<br/>
+		</div>
+
+	</div>
+
+	
+	<div class="row">
+
+		<div class="col-md-12">
+			<h4>Orders Information</h4>
+			{% if orders|length != 0 %}
+				
+				<p><b>Your Previous orders</b></p>
+				<table class="table">
+					<thead>
+						<tr>
+							<td><p>Kitchen</p></td><td><p>Course</p></td><td><p>Start date</p></td><td><p>End Date</p></td><td><p>Address</p></td><td><p>Landmark</p></td><td><p>Mobile</p></td><td><p>Quantity</p></td>
+						</tr>
+					</thead>
+					<tbody>
+					{% for elem in orders %}
+						<tr>
+							<td><p>{{ elem.order.kitchen }}</p></td><td><p>{{ elem.order.course }}</p></td><td><p>{{ elem.order.start_date|date }}</p></td><td><p>{{ elem.order.end_date|date }}</p></td><td><p>{{elem.order.address}}</p></td><td><p>{{elem.order.landmark}}</p></td><td><p>{{elem.order.mobile}}</p></td><td><p>{{elem.order.quantity}}</p></td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>	
+
+
+			{% else %}
+
+				<p><b>You have no Previous Orders</b></p>
+
+			{%  endif %}
+
+			
+				
+			
+		</div>
+
+		
+			<div class="modal fade" id="pswdChangeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			        <h4 class="modal-title" >Change Password</h4>
+			      </div>
+			      <form class="form-horizontal" role="form" action="/user/" method="POST" name="pswdForm">
+				      <div class="modal-body">
+					      	
+							{% csrf_token %}
+							  <div class="form-group">
+							    <label for="inputPassword3" class="col-sm-4 control-label">	New Password</label>
+							    <div class="col-sm-8">
+							      <input type="password" name="pswd" class="form-control" id="inputPassword3" placeholder="New Password" required minlength="8">
+							    </div>
+							  </div>
+							  <div class="form-group">
+							    <label for="inputPassword3Confirm" class="col-sm-4 control-label">Confirm Password</label>
+							    <div class="col-sm-8">
+							      <input type="password" name="confirm_pswd" class="form-control" id="inputPassword3Confirm" placeholder="Confirm Password" required minlength="8">
+							    </div>
+							  </div>
+							  <input type="hidden" name="type" class="form-control" value="pswdForm">
+							  
+							
+				        
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				        <button type="submit" class="btn btn-primary">Save</button>
+				      </div>
+			      </form>
+			    </div><!-- /.modal-content -->
+			  </div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+		<div class="modal fade" id="addEmailModal" tabindex="-1" role="dialog" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			        <h4 class="modal-title" >Change Password</h4>
+			      </div>
+			      <form class="form-horizontal" role="form" action="/user/" method="POST" name="emailForm">
+				      <div class="modal-body">
+					      	
+							{% csrf_token %}
+							  <div class="form-group">
+							    <label for="EmailField" class="col-sm-4 control-label">Your Email</label>
+							    <div class="col-sm-8">
+							      <input type="email" name="email" class="form-control" id="EmailField" placeholder="Email" required >
+							      <input type="hidden" name="type" class="form-control" value="emailForm">
+							      <p>{{ message }}</p>  
+							    </div>
+							  </div>  
+							  
+							
+				        
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				        <button type="submit" class="btn btn-primary">Save</button>
+				      </div>
+			      </form>
+			    </div><!-- /.modal-content -->
+			  </div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+
+	</div>
+		
+	<script>
+		$(document).ready(function(){
+			console.log("nothing")
+			$("form[name='pswdForm']").validate({
+
+	       	rules: {
+				pswd: "required",
+				confirm_pswd: {
+				equalTo: "#inputPassword3Confirm"
+				}
+			}
+
+			})
+			$("form[name='emailForm']").validate()
+		})
+	</script>
+{% endblock %}
+

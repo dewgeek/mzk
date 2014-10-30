@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% block content %}
+{% load db_extras %}
+{% load static %}
+	<div class="row">
+
+		<title>{{ kitchen.name }}'s kitchen</title>
+		<div class="col-sm-6 text-center">
+
+			<div class="slideshow ">
+				{% for picture in pictures %}
+					{% ifequal picture.pic_category.name 'food' %}
+							<div>
+								<p class="text-left"><b>{{ picture.title }}</b><br/><small>{{ picture.caption }}</small></p>
+								<img src="/media/{{ picture.photo }}" class="img-responsive" />
+							</div>
+					{% endifequal %}
+				{% endfor %}
+			</div>		
+			
+			
+			{% for picture in pictures %}
+				{% ifequal picture.pic_category.name 'surp' %}
+				<div class="row picture_holder">
+					
+					<div class="col-xs-12"> 
+						<p class="text-left"><b>{{ picture.title|capfirst }}</b><br/><small>{{ picture.caption }}</small></p>
+						<img src="/media/{{ picture.photo }}" class="img-responsive" />
+					</div>
+				</div>
+
+				{% endifequal %}
+			{% endfor %}
+		
+			
+
+		</div>
+
+		
+		
+
+		<div class="col-sm-6 col-xs-12">
+			<div class="row">
+				<div class="col-xs-2" style="padding-right:0"><img src="{{ MEDIA_URL }}{{ kitchen.profile }}" class="img-responsive"></div>
+				<div class="col-xs-10"><h3>{{ kitchen.name }}'s Kitchen</h3></div>
+			</div>
+			<div class="row">
+				<div class="col-xs-3"><p><br/><b>Location</b></p></div>
+				<div class="col-xs-9"><p><br/>{{ kitchen.spec_location }}</p></div>
+
+			</div>
+			<div class="row">
+				<div class="col-xs-12"><p><b>Description:</b></p></div>
+				<div class="col-xs-12"><p>{{ kitchen.description }}</p></div>	
+			</div>
+			<div class="row">
+				<div class="col-sm-3"><p><b>Popular Food</b></p></div>
+				<div class="col-sm-9"><p>{{ kitchen.pop_food }}</p></div>
+			</div>
+			<div class="row  table-responsive">
+				<form id="order_form">
+					<input type="hidden" value="{{ kitchen }}" name="kitchen"/>
+					<table class="table table-condensed table-responsive">
+						<thead>
+							<td></td>
+							<td><p><b>Course</b></p></td>
+							<td><p><b>Timings</b></p></td>
+							<td><p><b>Span</b></p></td>
+							<td><p><b>Cost</b></p></td>
+						</thead>
+						<tbody>
+						{% csrf_token %}
+						{% for elem in kitchen.fooddelivery.all %}
+							
+							<tr>
+
+								<td>
+									<input type="checkbox" name="{{ elem.name }}" id="check_{{ elem.name }}">
+								</td>
+								<td>
+									<label for="check_{{ elem.name }}"><p>{{ elem.name }}</p></label>
+								</td>
+								<td><p>{{ elem.start_time }} - {{ elem.end_time }}</p></td>
+								<td>
+									<select name="span_{{ elem.name }}">
+										<option value="7"><p>7 Days</p></option>
+										<option value="15"><p>15 Days</p></option>
+										<option value="30"><p>30 Days</p></option>
+									</select>
+								</td>
+								<td>
+									<p>
+									{% for price in prices %}
+										{% if price.course == elem.name %}
+										<span id="subcost_{{elem.name }}">{{ price.cost|multiply:7 }}</span>
+										<input type="hidden" value="{{price.cost}}" name="price_{{ elem.name }}"/>
+										{% endif %}
+									{% endfor %}
+									</p>
+								</td>
+							</tr>
+						{% endfor %}
+							<tr>
+								<td></td><td></td><td></td><td><p><b>Total Cost</b></p></td><td id="total_cost"></td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-offset-8 col-md-4">
+					<button class="order-btn" id="submit_form">Order</button>
+				</div>
+			</div>
+
+			
+
+				<!-- Modal -->
+			
+			
+		</div>
+
+	</div>
+	<script type="text/javascript" src="{% static 'js/profile.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.cycle.lite.js' %}"></script>
+	
+{% endblock %}

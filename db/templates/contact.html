@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+{% load db_extras %}
+{% load static %}
+<title>Contact us</title>
+	<div class="row">
+		<div class="col-md-12"><p>{{ message }}</p></div>
+	<form class="form-horizontal" role="form" action="/contact/" method="POST">
+			{% csrf_token %}
+			
+		  <div class="form-group">
+		    <label for="id_name" class="col-sm-2 control-label">Name*</label>
+		    <div class="col-sm-10">
+		      <input type="name" class="form-control" id="id_name" placeholder="Your name" name="name">
+		      <p class="error">{{ form.name.errors.0 }}</p>
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="id_email" class="col-sm-2 control-label">Email</label>
+		    <div class="col-sm-10">
+		      <input type="email" class="form-control" id="id_email" placeholder="Email" name="email">
+		      <p class="error">{{ form.name.errors.0 }}</p>
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="id_message" class="col-sm-2 control-label">Message*</label>
+		    <div class="col-sm-10">
+		      <textarea name="message" rows=8 class="form-control" id="id_message" placeholder="your Message"></textarea>
+		      <p class="error">{{ form.name.errors.0 }}</p>
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <div class="col-sm-offset-2 col-sm-10">
+		      <button type="submit" class="btn btn-default">Submit</button>
+		    </div>
+		  </div>
+		</form>
+	</div>
+{% endblock %}

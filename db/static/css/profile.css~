@@ -1,0 +1,53 @@
+
+.navbar-brand{
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+.order-btn{
+	background-color: #1b5c27;
+	border-radius:5px;
+	border:1px;
+	color: #fff;
+	padding: 05px;
+	width:100%; 
+}
+
+.img-responsive{
+	margin: 0 auto;
+}
+
+.table p, .table-condensed p{
+	font-size: 14px;
+	margin-bottom: 0px;
+}
+.table tr, .table-condensed tr{
+	padding: 0px;
+}
+.table option, .table select{
+	font-size: 14px;
+	
+}
+
+.picture_holder{
+	margin-top:15px;
+}
+
+.slideshow{
+	height:400px;
+	overflow:hidden;
+}
+
+.footer{
+	margin-bottom:0px;
+	margin-top:20px;
+	background-color: #444;
+	padding: 15px 15px 15px 15px;
+}
+
+.modal-footer,.modal-header,.modal-body{
+	padding: 10px;
+}
+
+.error{
+	color:'#A80000 ';
+}

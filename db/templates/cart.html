@@ -1,0 +1,22 @@
+						{% for order in orders %}
+			        		{% for elem in order.orders %}
+			        			<tr id="{{ order.kitchen }}_{{ elem.course }}">
+			        				<td><p>{{ order.kitchen }}</p></td>
+				        			<td><p>{{ elem.course }}</p></td>
+				        			<td><p>{{ elem.span }} Days</p></td>
+				        			<td><p>{{ elem.cost }}</p></td>
+				        			<td >
+					        			<form class="cartform" id="form__{{ order.kitchen }}_{{ elem.course }}">
+					        				{% csrf_token %}
+					        		
+						        			<input type="hidden" name="kitchen" value="{{ order.kitchen }}"/>
+				        					<input type="hidden" name="course" value="{{ elem.course }}"/>
+						        			<button type="submit" class="btn btn-xs">
+						        				<span class="glyphicon glyphicon-remove"></span>
+						        			</button>
+				        				</form>
+				        			</td>
+				        			
+			        			</tr>
+			        		{% endfor %}
+			        	{% endfor %}

@@ -1,0 +1,112 @@
+
+				
+					<table class="table">
+						<thead>
+							<tr>
+								<td>Kitchen</td><td>Course</td><td>Quantity</td><td>Delivery address</td><td>Mobile </td><td>Landmark</td><td>Options</td>
+							</tr>
+						</thead>
+						<tbody>
+						{% for order in orders %}
+					
+			        			<tr id="{{ order.kitchen }}_{{ order.course }}">
+			        				<td class="kitchen"><p>{{ order.kitchen }}</p></td>
+				        			<td class="course"><p>{{ order.course }}</p></td>
+				        			<td class="course"><p>{{ order.quantity }}</p></td>
+				        			<td class="address"><p>{{ order.address }}</p></td>
+				        			<td class="mobile"><p>{{ order.mobile }}</p></td>
+				        			<td class="landmark"><p>{{ order.landmark }}</p></td>
+
+				        			<td>
+			        					<ul class="list-inline">
+		        							<li style="padding-right: 0px;">
+							        			<form class="cartform cart_subforms_edit" id="form__{{ order.kitchen }}_{{ order.course }}_edit" >
+							        				{% csrf_token %}
+							        		
+								        			<input type="hidden" name="kitchen" value="{{ order.kitchen }}"/>
+						        					<input type="hidden" name="course" value="{{ order.course }}"/>
+
+								        			<button type="submit" class="btn btn-xs" title="Edit this order">
+								        				<span class="glyphicon glyphicon-pencil"></span>
+								        			</button>						        			
+						        				</form>
+
+		        							</li>
+		        							<li style="padding-right: 0px;">
+							        			<form class="cartform cart_subforms_remove" id="form__{{ order.kitchen }}_{{ order.course }}_remove">
+							        				{% csrf_token %}
+							        				
+							        				<input type="hidden" value="{{ date }}" name="date"/>
+												    <input type="hidden" value="{{ month }}" name="month"/>
+												    <input type="hidden" value="{{ year }}" name="year"/>
+								        			<input type="hidden" name="kitchen" value="{{ order.kitchen }}"/>
+						        					<input type="hidden" name="course" value="{{ order.course }}"/>
+						        					<input type="hidden" name="order_id" value="{{ order.id }}"/>
+						        				
+								        			<button type="submit" class="btn btn-xs" title="Cancel your order today">
+								        				<span class="glyphicon glyphicon-remove"></span>
+								        			</button>
+						        				</form>
+
+		        							</li>
+
+
+		        						</ul>
+
+				        			</td>
+			        			</tr>
+				        	{% endfor %}
+			        		</tbody>
+		        		</table>
+		        				<div class="row">
+		        				{% for order in orders %}
+
+			        				<div style="display:none" id="form__{{ order.kitchen }}_{{ order.course }}" class="	cart_subforms_div col-md-offset-1 col-md-10">
+					        			<form role="form" class="form cart_subforms" action="/edit_order/" method="POST">
+					        				
+					        				
+					        				
+									  		<input type="hidden" name="order_id" value="{{ order.id }}"/>
+										  <div class="form-group">
+										    <label for="">Address</label>
+										    <textarea class="form-control" placeholder="Address" name="address">{{ order.address }}</textarea>
+										  </div>
+										  <div class="form-group">
+										    <label for="">Mobile</label>
+										    <input type="number" class="form-control" name="mobile" placeholder="Mobile" value="{{ order.mobile }}">
+										  </div>
+										  <div class="form-group">
+										    <label for="">Landmark</label>
+										    <input type="text" class="form-control" name="landmark" placeholder="landmark" value="{{ order.landmark }}">
+										  </div>
+										  <div class="form-group">
+										    <label for="">Quantity</label>
+										    <select class="form-control" name="quantity">
+										    	<option value=1>1</option>
+										    	<option value=2>2</option>
+										    	<option value=3>3</option>
+										    	<option value=4>4</option>
+										    	<option value=5>5</option>
+												<option value=6>6</option>
+												
+										    </select>
+										  </div>
+										  <input type="hidden" value="" name="date"/>
+										  <input type="hidden" value="" name="month"/>
+										  <input type="hidden" value="" name="year"/>
+											
+											{% csrf_token %}
+
+											
+										  <input type="submit" class="btn btn-primary" value="Save"/>
+										  <button id="close_subforms" class="btn btn-default">cancel</button>
+										</form>
+									</div>
+								{% endfor %}
+								</div>
+
+<style type="text/css">
+	li{
+
+	}
+</style>
